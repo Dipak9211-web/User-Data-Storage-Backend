@@ -6,6 +6,6 @@ import {Profiles, ProfilesCount, searchProfiles} from '../controllers/userdata.j
 
 router.get("/profiles/count",requireSignin, ProfilesCount);
 router.get("/profiles/:page",requireSignin, Profiles);
-router.get("/profiles/search/:keyword/:total",requireSignin, searchProfiles)
+router.get("/profiles/search/:keyword",requireSignin, searchProfiles)
 
 export default router;

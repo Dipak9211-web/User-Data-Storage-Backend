@@ -12,7 +12,7 @@ export const ProfilesCount = async(req, res)=>{
 //data loading based on pagination
 export const Profiles = async(req, res)=>{
     try {
-        const perPage = 10;
+        const perPage = 15;
       const page = req.params.page// req.params.page:1; //means by default 1
        const profiles = await userData.find({}).
        select("-id")//when i had inserted dummy data on databse unfortunately dummy data had own id , so here i have deselect that id
@@ -33,8 +33,8 @@ export const Profiles = async(req, res)=>{
 //Searching profiles by keyword
 export const searchProfiles = async(req, res)=>{
     try {
-        const {keyword, total} = req.params;
-        const perPage = 10
+        const {keyword} = req.params;
+       // const perPage = 15;
         const searchResult = await userData.find({
             $or: [
                 { firstName: { $regex: keyword, $options: "i" } },
@@ -43,8 +43,6 @@ export const searchProfiles = async(req, res)=>{
               ],
         })
         .select("-id")
-        .skip((total-1) * perPage)
-       .limit(perPage)
        .sort({firstName:1})
         if(searchResult){
             res.json(searchResult)
